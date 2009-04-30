@@ -1,0 +1,31 @@
+class <%= migration_name %> < ActiveRecord::Migration
+  def self.up
+
+	  create_table :tally_sheets, :force => true do |t|
+	    t.column :voter_id, :integer
+	    t.column :voter_type, :string
+			t.column :tallyable_id, :integer
+			t.column :tallyable_type, :string
+			t.column :for, :boolean
+			t.timestamps
+	  end		
+
+    add_index :tally_sheets, [ :voter_id, :voter_type ]
+    add_index :tally_sheets, [ :tallyable_id, :tallyable_type ]
+
+<% tallyables.each do |t| -%>
+    add_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count, :string
+<% end -%>
+  end
+
+  def self.down
+		drop_table :tally_sheets
+		
+    remove_index :tally_sheets, [ :voter_id, :voter_type ]
+    remove_index :tally_sheets, [ :tallyable_id, :tallyable_type ]
+
+<% tallyables.each do |t| -%>
+    remove_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count
+<% end -%>
+  end
+end

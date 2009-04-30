@@ -22,13 +22,7 @@ Gem::Specification.new do |s|
     "lib/tally.rb",
     "lib/tally/tallyable.rb",
     "lib/tally/voter.rb",
-    "rails/init.rb",
-    "test/database.yml",
-    "test/helper.rb",
-    "test/tally_test.rb",
-    "test/tallyable_test.rb",
-    "test/test_helper.rb",
-    "test/voter_test.rb"
+    "rails/init.rb"
   ]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/theoooo/tally}
@@ -36,13 +30,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{TODO}
-  s.test_files = [
-    "test/helper.rb",
-    "test/tally_test.rb",
-    "test/tallyable_test.rb",
-    "test/test_helper.rb",
-    "test/voter_test.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

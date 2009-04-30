@@ -1,0 +1,7 @@
+= tally
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 Theo Cushion. See LICENSE for details.

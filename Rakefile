@@ -9,7 +9,8 @@ begin
     gem.email = "theo@jivatechnology.com"
     gem.homepage = "http://github.com/theoooo/tally"
     gem.authors = ["Theo Cushion"]
-
+    gem.files = Dir['app/**/*.rb']
+    # gem.add_dependency('')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

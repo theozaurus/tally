@@ -25,28 +25,24 @@ module Tally
       
       def vote tallyable, value
         # TODO: Figure out why i can't just reference :tallyable => tallyable
-        votes.tally(tallyable).find(:first).try(:update_attribute, :for, !!value) || 
-          votes.create(:tallyable_id => tallyable.id, :tallyable_type => tallyable.class.to_s, :for => !!value)
+        votes.tally(tallyable).find(:first).try(:update_attribute, :for, value) || 
+          votes.create(:tallyable_id => tallyable.id, :tallyable_type => tallyable.class.to_s, :for => value)
       end
       
       def vote_destroy tallyable 
         votes.tally(tallyable).find(:first).try(:destroy)
-        # votes.find(:first, :conditions => {:tallyable => tallyable}).try(:destroy)
       end
       
       def voted_for? tallyable
         !!votes.tally(tallyable).find(:first, :conditions => {:for => true})
-        # !!votes.find(:first, :conditions => {:tallyable => tallyable, :for => true})        
       end
       
       def voted_against? tallyable
         !!votes.tally(tallyable).find(:first, :conditions => {:for => false})
-        # !!votes.find(:first, :conditions => {:tallyable => tallyable, :for => false})
       end
       
       def voted_on? tallyable
         !!votes.tally(tallyable).find(:first)
-        # !!votes.find(:first, :conditions => {:tallyable => tallyable})
       end
 
     end

@@ -6,11 +6,9 @@ module Tally
     end
     
     module ClassMethods
-      def has_tally
-        #require 'statistics2'
-        
+      def has_tally      
         include InstanceMethods
-        has_many :votes, :as => :tallyable, :class_name => "TallySheet"
+        has_many :votes, :as => :tallyable, :class_name => "TallySheet", :after_add => :update_tally_score!, :after_remove => :update_tally_score!
         has_many :votes_for, :as => :tallyable, :class_name => "TallySheet", :conditions => {:for => true}
         has_many :votes_against, :as => :tallyable, :class_name => "TallySheet", :conditions => {:for => false}
       end
@@ -22,20 +20,19 @@ module Tally
         # TODO: Figure out why I can't do :voter => voter
         !!votes.find(:first, :conditions => {:voter_id => voter, :voter_type => voter.class.to_s})
       end
-      
-      def vote_score
-        vote_ci_lower_bound
+            
+      def update_tally_score!
+        update_attribute(:tally_score, tally_ci_lower_bound) # Skips validation
       end
       
       # From http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
-      def vote_ci_lower_bound(pos = votes_for.count, n = votes.count, power = 0.10)
-        1
-        # if n == 0
-        #     return 0
-        # end
-        # z = Statistics2.pnormaldist(1-power/2)
-        # phat = 1.0*pos/n
-        # (phat + z*z/(2*n) - z * Math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
+      def tally_ci_lower_bound(pos = votes_for.count, n = votes.count, power = 0.10)
+        if n == 0
+          return 0
+        end
+        z = Rubystats::NormalDistribution.new.icdf(1-power/2)
+        phat = 1.0*pos/n
+        (phat + z*z/(2*n) - z * Math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
       end    
       
     end

@@ -15,6 +15,7 @@ class <%= migration_name %> < ActiveRecord::Migration
 
 <% tallyables.each do |t| -%>
     add_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count, :string
+    add_column :<%= t.underscore.camelize.tableize %>, :tally_score, :string
 <% end -%>
   end
 

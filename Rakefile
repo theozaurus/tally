@@ -11,7 +11,7 @@ begin
     gem.authors = ["Theo Cushion"]
     gem.files = Dir['app/**/*.rb'] + Dir['generators/**/*'] + Dir['lib/**/*'] + Dir['rails/**/*'] + %w[LICENSE README.rdoc]
     gem.test_files = []
-    # gem.add_dependency('')
+    gem.add_dependency('rubystats')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

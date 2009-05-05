@@ -8,7 +8,7 @@ module Tally
     module ClassMethods
       def has_tally      
         include InstanceMethods
-        has_many :votes, :as => :tallyable, :class_name => "TallySheet", :after_add => :update_tally_score!, :after_remove => :update_tally_score!
+        has_many :votes, :as => :tallyable, :class_name => "TallySheet"
         has_many :votes_for, :as => :tallyable, :class_name => "TallySheet", :conditions => {:for => true}
         has_many :votes_against, :as => :tallyable, :class_name => "TallySheet", :conditions => {:for => false}
       end

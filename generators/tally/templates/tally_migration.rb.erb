@@ -14,8 +14,8 @@ class <%= migration_name %> < ActiveRecord::Migration
     add_index :tally_sheets, [ :tallyable_id, :tallyable_type ]
 
 <% tallyables.each do |t| -%>
-    add_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count, :string
-    add_column :<%= t.underscore.camelize.tableize %>, :tally_score, :string
+    add_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count, :integer
+    add_column :<%= t.underscore.camelize.tableize %>, :tally_score, :integer
 <% end -%>
   end
 
@@ -27,6 +27,7 @@ class <%= migration_name %> < ActiveRecord::Migration
 
 <% tallyables.each do |t| -%>
     remove_column :<%= t.underscore.camelize.tableize %>, :tally_sheets_count
+    remove_column :<%= t.underscore.camelize.tableize %>, :tally_score
 <% end -%>
   end
 end

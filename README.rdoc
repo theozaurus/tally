@@ -4,4 +4,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2009 Theo Cushion. See LICENSE for details.
+Copyright (c) 2009 Jiva Technology Limited. See LICENSE for details.
